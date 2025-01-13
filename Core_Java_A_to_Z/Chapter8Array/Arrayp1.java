@@ -1,4 +1,4 @@
-package Chapter_8_Array;
+package Chapter8Array;
 class Arrayp1
 {
     public static void main(String [] args){
