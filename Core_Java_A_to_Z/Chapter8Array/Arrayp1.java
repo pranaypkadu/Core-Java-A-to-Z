@@ -1,4 +1,4 @@
-package Chapter8Array;
+package Chapter8array;
 class Arrayp1
 {
     public static void main(String [] args){
@@ -7,7 +7,8 @@ class Arrayp1
         int arr [] = {50, 60, 70, 80, 90};
         // display all the 5 elements
         for (int i=0; i<5; i++){
-            System.out.println(arr[i]);
+            System.out.print(arr[i]);
+            // System.out.print("{"+arr[i]+"}");
         }
 
 
