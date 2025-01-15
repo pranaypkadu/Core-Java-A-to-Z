@@ -1,3 +1,10 @@
+// Second Largest Number
+// Easy
+// 40/40
+// Average time to solve is 23m
+// Contributed by
+// 731 upvotes
+// Asked in company
 // Problem statement
 
 // You have been given an array ‘a’ of ‘n’ unique non-negative integers.
@@ -56,76 +63,81 @@
 // 1. Sort the array.
 // 2. More efficiently, can you use the largest and smallest elements to find the required elements?
 
-// Java (17)
-// 1
-// 2
-// 3
-// 4
-// 5
-
-import java.io.*;
-import java.util.*;
 
 package Chapter8array;
 
 public class Arrayp4 {
-
-    static private int secondSmallest(int[] arr, int n)
-    {
-        if (n < 2)
-        {
-            return -1;
-        }
-        int small = Integer.MAX_VALUE;
-        int second_small = Integer.MAX_VALUE;
-        int i;
-        for (i = 0; i < n; i++)
-        {
-           if (arr[i] < small)
-           {
-              second_small = small;
-              small = arr[i];
-           }
-           else if (arr[i] < second_small && arr[i] != small)
-           {
-              second_small = arr[i];
-           }
-        }
-       return second_small;
-    }
-    static private int secondLargest(int[] arr, int n)
-    {
-        if(n<2)
-        return -1;
-
-        int large = Integer.MIN_VALUE;
-        
-        int second_large = Integer.MIN_VALUE;
-        int i;
-        for (i = 0; i < n; i++)
-        {
-            if (arr[i] > large)
-            {
-                second_large = large;
-                large = arr[i];
-            }
+    // Method to find the second largest element in an array
+    public static int secondLargest(int n, int[] a) {
+        if (n < 2) return -1; // Not enough elements for a second largest
     
-            else if (arr[i] > second_large && arr[i] != large)
-            {
-                second_large = arr[i];
+        int largest = Integer.MIN_VALUE;
+        int slargest = Integer.MIN_VALUE;
+    
+        for (int i = 0; i < n; i++) {
+            if (a[i] > largest) {
+                slargest = largest;
+                largest = a[i];
+            } else if (a[i] > slargest && a[i] < largest) {
+                slargest = a[i];
             }
         }
-        return second_large;
+    
+        return slargest == Integer.MIN_VALUE ? -1 : slargest; // Handle case with no valid second largest
+        }
+    
+    // Method to find the second smallest element in an array
+    public static int secondSmallest(int n, int[] a) {
+        if (n < 2) return -1; // Not enough elements for a second smallest
+    
+        int smallest = Integer.MAX_VALUE;
+        int ssmallest = Integer.MAX_VALUE;
+    
+        for (int i = 0; i < n; i++) {
+            if (a[i] < smallest) {
+                ssmallest = smallest;
+                smallest = a[i];
+            } else if (a[i] > smallest && a[i] < ssmallest) {
+                ssmallest = a[i];
+            }
+        }
+    return ssmallest == Integer.MAX_VALUE ? -1 : ssmallest; // Handle case with no valid second smallest
     }
     
-    public static void main(String[] args)
-    {
-        int[] arr = {1, 2, 4, 7, 7, 5};
-        int n = arr.length;
-            int sS = secondSmallest(arr, n);
-            int sL = secondLargest(arr, n);
-        System.out.println("Second smallest is "+sS);
-        System.out.println("Second largest is "+sL);
+    // Method to get both second largest and second smallest elements
+    public static int[] getSecondOrderElements(int n, int[] a) {
+        int slargest = secondLargest(n, a); // Call to find second largest
+        int ssmallest = secondSmallest(n, a); // Call to find second smallest
+        return new int[]{slargest, ssmallest};
     }
-    
-    }    
+} 
+
+// -------------------------------------------------------------------
+
+
+// import java.util.*;
+// public class Solution {
+//     public static int[] getSecondOrderElements(int n, int []a) {
+//         // Initializing the driver variables.
+//         int small = Integer.MAX_VALUE, secondSmall = Integer.MAX_VALUE;
+//         int large = Integer.MIN_VALUE, secondLarge = Integer.MIN_VALUE;
+
+//         // Iterating over an array and calculating the smaller and larger numbers.
+//         for (int i = 0; i < n; i++) {
+//             small = Math.min(small, a[i]);
+//             large = Math.max(large, a[i]);
+//         }
+
+//         // Iterating again and updating the second order numbers.
+//         for (int i = 0; i < n; i++) {
+//             if (a[i] < secondSmall && a[i] != small) {
+//                 secondSmall = a[i];
+//             }
+//             if (a[i] > secondLarge && a[i] != large) {
+//                 secondLarge = a[i];
+//             }
+//         }
+
+//         return new int[]{secondLarge, secondSmall};
+//     }
+// }
